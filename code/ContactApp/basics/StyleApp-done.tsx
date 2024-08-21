@@ -1,32 +1,9 @@
-import {View, Text} from 'react-native';
+import {View, Text, Image} from 'react-native';
 import React from 'react';
 
-const Header = () => {
-  return (
-    <View
-      style={{
-        alignItems: 'flex-start',
-        justifyContent: 'space-between',
-        flexDirection: 'row',
-        paddingTop: 20,
-        backgroundColor: 'green',
-      }}>
-      <View
-        style={{
-          backgroundColor: 'red',
-        }}>
-        <Text>Top Left</Text>
-      </View>
+import StyledHeader from './StyledHeader';
 
-      <View
-        style={{
-          backgroundColor: 'blue',
-        }}>
-        <Text>Top Right</Text>
-      </View>
-    </View>
-  );
-};
+import BackgroundImage from '../assets/background.jpeg';
 
 const Footer = () => {
   return (
@@ -51,9 +28,35 @@ const Footer = () => {
 const StyleApp = () => {
   return (
     <View style={{flex: 1}}>
-      <Header />
+      <StyledHeader title={'Styled App'} />
+      <StyledHeader title={'Home Page'} />
+      <StyledHeader />
 
-      <View style={{flex: 1, backgroundColor: 'purple'}}>
+      <View style={{flex: 1, backgroundColor: 'white'}}>
+        <Image
+          source={{
+            uri: 'https://images.unsplash.com/photo-1724010930544-59b11726a226?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+            width: 400,
+            height: 400,
+          }}
+          style={{
+            width: 200,
+            height: 200,
+            resizeMode: 'cover',
+            backgroundColor: 'red',
+            borderRadius: 100,
+          }}
+        />
+        <Image
+          source={BackgroundImage}
+          style={{
+            width: null,
+            height: 400,
+            marginTop: 20,
+            resizeMode: 'cover',
+            backgroundColor: 'red',
+          }}
+        />
         <Text> The middle</Text>
       </View>
 
