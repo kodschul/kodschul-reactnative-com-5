@@ -11,8 +11,9 @@ const StyledHeader = ({title = 'Hi'}: HeaderProps) => {
       style={{
         alignItems: 'flex-start',
         justifyContent: 'space-between',
+        // justifyContent: 'center',
         flexDirection: 'row',
-        paddingTop: 20,
+        // paddingTop: 20,
         backgroundColor: 'silver',
         borderWidth: 1,
         paddingHorizontal: 10,

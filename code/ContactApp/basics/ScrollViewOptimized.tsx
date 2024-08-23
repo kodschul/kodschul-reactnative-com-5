@@ -6,6 +6,7 @@ import {
   Pressable,
   TextInput,
   Dimensions,
+  ActivityIndicator,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import StyledHeader from './StyledHeader';
@@ -13,7 +14,7 @@ import Icon from 'react-native-vector-icons/Entypo';
 
 const {width: deviceWidth, height: deviceHeight} = Dimensions.get('window');
 
-const ListItemsApp = () => {
+const ScrollViewOptimized = () => {
   const [fruits, setFruits] = useState(['apple', 'mango', 'lemon', 'orange']);
 
   const [inputText, setInputText] = useState('');
@@ -40,7 +41,7 @@ const ListItemsApp = () => {
       style={({pressed}) => ({opacity: pressed ? 0.5 : 1})}>
       <View
         style={{
-          height: 400,
+          height: 300,
           width: deviceWidth,
           backgroundColor: i % 2 == 0 ? 'blue' : 'orange',
         }}>
@@ -65,7 +66,7 @@ const ListItemsApp = () => {
   );
 
   return (
-    <View>
+    <>
       {/* <StyledHeader title="List Items App" /> */}
 
       {/* <View>
@@ -93,7 +94,33 @@ const ListItemsApp = () => {
         onEndReached={() => console.warn('END_REACHED')}
       /> */}
 
-      <ScrollView>
+      <FlatList
+        data={[]}
+        // stickyHeaderIndices={[0]}
+        ListHeaderComponent={
+          <ScrollView
+            horizontal
+            snapToInterval={deviceHeight}
+            snapToAlignment={'end'}>
+            {fruits.map(renderFruitA)}
+          </ScrollView>
+        }
+        contentContainerStyle={{flex: 1}}
+        ListEmptyComponent={
+          <View style={{flex: 1, backgroundColor: 'red'}}>
+            <Text>No Items</Text>
+          </View>
+        }
+        ListFooterComponent={<ActivityIndicator />}
+        renderItem={({item, index}) => renderFruitB(item, index)}
+        initialNumToRender={1}
+        refreshing={false}
+        onRefresh={() => console.warn('REFRESH')}
+        keyExtractor={item => item.toString()}
+        onEndReached={() => console.warn('END_REACHED')}
+      />
+
+      {/* <ScrollView>
         <ScrollView
           horizontal
           snapToInterval={deviceHeight}
@@ -103,9 +130,9 @@ const ListItemsApp = () => {
         <ScrollView snapToInterval={deviceHeight} snapToAlignment={'start'}>
           {fruits.map(renderFruitB)}
         </ScrollView>
-      </ScrollView>
-    </View>
+      </ScrollView> */}
+    </>
   );
 };
 
-export default ListItemsApp;
+export default ScrollViewOptimized;

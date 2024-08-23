@@ -1,13 +1,31 @@
-import {View, Text, ImageBackground, Image, TextInput} from 'react-native';
+import {
+  View,
+  Text,
+  ImageBackground,
+  Image,
+  TextInput,
+  SafeAreaView,
+  StatusBar,
+} from 'react-native';
 import React from 'react';
 
 import BackgroundImage from '../assets/background.jpeg';
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 const ImageApp1 = () => {
+  const {top} = useSafeAreaInsets();
   return (
     <ImageBackground
       source={BackgroundImage}
-      style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      style={{flex: 1, paddingTop: top}}>
+      <StatusBar
+        barStyle={'light-content'}
+        translucent
+        backgroundColor={'transparent'}
+      />
       <Text style={{color: 'white', fontSize: 20}}>ImageApp</Text>
     </ImageBackground>
   );
@@ -47,4 +65,12 @@ const ImageApp2 = () => {
   );
 };
 
-export default ImageApp2;
+const App = () => {
+  return (
+    <SafeAreaProvider>
+      <ImageApp1 />
+    </SafeAreaProvider>
+  );
+};
+
+export default App;
